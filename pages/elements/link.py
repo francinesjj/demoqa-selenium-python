@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
 class LinkPage:
     def __init__(self, driver):
         self.driver = driver
@@ -28,9 +27,6 @@ class LinkPage:
             const iframes = document.querySelectorAll('iframe');
             iframes.forEach(iframe => {
                 iframe.remove();
-
-                // hide iframes
-                // iframe.style.display = 'none';
             });
         """)
 

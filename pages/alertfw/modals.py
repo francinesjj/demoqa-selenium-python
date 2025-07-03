@@ -25,19 +25,19 @@ class ModalsPage:
         """)
 
     def open_small_modal(self):
-        button = self.driver.find_element(*self.small_modal_btn)
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+        button = self.driver.find_element(*self.small_modal_btn) # finds element
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", button) # scrolls to the element
         button.click()
 
         WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(self.small_modal_text)
+            EC.visibility_of_element_located(self.small_modal_text) # waits until modal text is visible
         )
 
-        modal_body = self.driver.find_element(*self.small_modal_text)
+        modal_body = self.driver.find_element(*self.small_modal_text) # retrieves modal text
         expected_text = "This is a small modal. It has very less content"
-        assert modal_body.text.strip() == expected_text, f"Modal text mismatch: {modal_body.text}"
+        assert modal_body.text.strip() == expected_text, f"Modal text mismatch: {modal_body.text}" # compares extracted text to expected_text
 
-        self.driver.find_element(*self.close_small_modal_btn).click()
+        self.driver.find_element(*self.close_small_modal_btn).click() # closes modal
 
     def open_large_modal(self):
         button = self.driver.find_element(*self.large_modal_btn)

@@ -9,8 +9,8 @@ def test_form(driver):
     form_page = FormPage(driver)
     form_page.open()
 
-    form_page.enter_firstName(fake.first_name())
-    form_page.enter_lastName(fake.last_name())
+    form_page.enter_firstname(fake.first_name())
+    form_page.enter_lastname(fake.last_name())
     form_page.enter_email(fake.email())
     form_page.select_gender()
     form_page.enter_number(fake.msisdn()[:10])

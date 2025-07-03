@@ -20,28 +20,28 @@ class BrowserWindowPage:
             const iframes = document.querySelectorAll('iframe');
             iframes.forEach(iframe => {
                 iframe.remove();
-
-                // hide iframes
-                // iframe.style.display = 'none';
             });
         """)
 
     def open_new_tab(self):
-        original_window = self.driver.current_window_handle
-        existing_windows = self.driver.window_handles
+        original_window = self.driver.current_window_handle # stores the id of the current open window
+        existing_windows = self.driver.window_handles # stores list of open windows
 
         new_tab = self.driver.find_element(*self.new_tab_btn)
         self.driver.execute_script("arguments[0].scrollIntoView(true);", new_tab)
         new_tab.click()
 
+        # waits until the number of open windows has increased
         WebDriverWait(self.driver, 10).until(
             lambda driver: len(driver.window_handles) > len(existing_windows)
         )
 
+        # finds new window by comparing it to original window
         new_window = [w for w in self.driver.window_handles if w != original_window][0]
+        # switches to the new window
         self.driver.switch_to.window(new_window)
 
-        # wait until element is present
+        # waits until element is present
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "h1"))
         )
@@ -51,7 +51,7 @@ class BrowserWindowPage:
         assert "This is a sample page" in page_text, "Expected text not found in new tab"
 
         self.driver.close()
-        self.driver.switch_to.window(original_window)
+        self.driver.switch_to.window(original_window) # switches back to original window for the next test
 
     def open_new_window(self):
         original_window = self.driver.current_window_handle

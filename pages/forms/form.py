@@ -27,11 +27,11 @@ class FormPage:
     def scroll_down(self):
         self.driver.execute_script("window.scrollTo(0, 400)")
 
-    def enter_firstName(self, firstName):
-        self.driver.find_element(*self.firstName_input).send_keys(firstName)
+    def enter_firstname(self, firstname):
+        self.driver.find_element(*self.firstName_input).send_keys(firstname)
 
-    def enter_lastName(self, lastName):
-        self.driver.find_element(*self.lastName_input).send_keys(lastName)
+    def enter_lastname(self, lastname):
+        self.driver.find_element(*self.lastName_input).send_keys(lastname)
 
     def enter_email(self, email):
         self.driver.find_element(*self.email_input).send_keys(email)
