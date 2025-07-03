@@ -60,6 +60,9 @@ A robust automated testing framework built using **Selenium** and **Python**, fo
 - **Autocomplete**: Input suggestion and selection handling
 - **Date Picker**: Date and month selection from calendar UI
 - **Tabs**: Switches between tab content and validates active state
+- **Menu**: Verifies multi-level hover navigation menu functionality and visibility of nested items
+- **Select Menu**: Tests selection of dropdown values (single and multi-select) and validates selected options
+- **Tool Tip**: Hovers over elements to trigger tooltip display and verifies correct tooltip text
 
 
 ---
