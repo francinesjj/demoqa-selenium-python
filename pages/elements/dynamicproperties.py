@@ -17,7 +17,6 @@ class DynamicPropertiesPage:
 
         time.sleep(2)
 
-        # Remove ads/iframes
         self.driver.execute_script("""
             const iframes = document.querySelectorAll('iframe');
             iframes.forEach(iframe => {

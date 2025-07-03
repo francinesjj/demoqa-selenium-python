@@ -25,9 +25,6 @@ class ButtonPage:
             const iframes = document.querySelectorAll('iframe');
             iframes.forEach(iframe => {
                 iframe.remove();
-
-                // hide iframes
-                // iframe.style.display = 'none';
             });
         """)
 
@@ -42,14 +39,14 @@ class ButtonPage:
         return double_elem.text
 
     def right_click(self):
-        right = self.driver.find_element(*self.right_btn)
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", right)
-        actions = ActionChains(self.driver)
-        actions.context_click(right).perform()
+        right = self.driver.find_element(*self.right_btn) # locates the element
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", right) # scrolls into the element
+        actions = ActionChains(self.driver) # initialization of ActionChains (advanced interactions)
+        actions.context_click(right).perform() # executes action
         right_elem = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(self.right_msg)  # ✅ correct message
+            EC.visibility_of_element_located(self.right_msg) # waits for the message to appear
         )
-        return right_elem.text
+        return right_elem.text # returns message; used for assertion
 
     def click(self):
         click = self.driver.find_element(*self.click_btn)

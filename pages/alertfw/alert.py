@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class AlertPage:
     def __init__(self, driver):
+        # LOCATORS
         self.driver = driver
         self.alert_btn = (By.XPATH, "//button[@id='alertButton']")
         self.time_alert_btn = (By.XPATH, "//button[@id='timerAlertButton']")
@@ -12,32 +13,31 @@ class AlertPage:
         self.prompt_btn = (By.XPATH, "//button[@id='promtButton']")
 
     def open(self):
+        # opens website and maximizes window
         self.driver.get("https://demoqa.com/alerts")
         self.driver.maximize_window()
 
         time.sleep(2)
 
+        # removes iframes
         self.driver.execute_script("""
             const iframes = document.querySelectorAll('iframe');
             iframes.forEach(iframe => {
                 iframe.remove();
-
-                // hide iframes
-                // iframe.style.display = 'none';
             });
         """)
 
     def click_alert_btn(self):
-        alert_btn =  self.driver.find_element(*self.alert_btn)
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", alert_btn)
-        alert_btn.click()
+        alert_btn =  self.driver.find_element(*self.alert_btn) # finds element
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", alert_btn) # js code to scroll to the element
+        alert_btn.click() # click
 
-        WebDriverWait(self.driver, 10).until(EC.alert_is_present())
-        alert = self.driver.switch_to.alert
+        WebDriverWait(self.driver, 10).until(EC.alert_is_present()) # waits for 10s until element is visible
+        alert = self.driver.switch_to.alert # switches context to alert box
 
-        assert alert.text == "You clicked a button", "Alert text did not match"
+        assert alert.text == "You clicked a button", "Alert text did not match" # checks if message matches and if not, displays 2nd text
 
-        alert.accept()
+        alert.accept() # clicks OK
 
     def click_time_alert(self):
         time_alert_btn = self.driver.find_element(*self.time_alert_btn)
@@ -66,8 +66,8 @@ class AlertPage:
         assert result_text == "You selected Ok", "Result text not updated correctly"
 
     def click_cancel_alert(self):
-        cancel_alert_btn = self.driver.find_element(*self.confirm_btn)
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", cancel_alert_btn)
+        cancel_alert_btn = self.driver.find_element(*self.confirm_btn) # finds element
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", cancel_alert_btn) # scrolls to the element
         cancel_alert_btn.click()
 
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
@@ -76,7 +76,7 @@ class AlertPage:
         assert cancel_alert.text == "Do you confirm action?", "Cancel alert text did not match"
 
         cancel_alert.dismiss()
-        result_text = self.driver.find_element(By.ID, "confirmResult").text
+        result_text = self.driver.find_element(By.ID, "confirmResult").text # gets the message on the page after alert is dismissed
         assert result_text == "You selected Cancel", "Result text not updated correctly"
 
     def click_prompt_alert_with_input(self, name="Franz"):

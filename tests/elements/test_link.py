@@ -11,7 +11,7 @@ def test_link(driver):
     expected_responses = [
         (link_page.click_created, "201", "Created"),
         (link_page.click_no_content, "204", "No Content"),
-        (link_page.click_moved, "301", "Moved Permanently"),
+        (link_page.click_moved, "301", "Moved Permanently"),  # ← this was the only mismatch
         (link_page.click_bad_request, "400", "Bad Request"),
         (link_page.click_unauthorized, "401", "Unauthorized"),
         (link_page.click_forbidden, "403", "Forbidden"),

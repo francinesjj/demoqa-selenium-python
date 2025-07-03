@@ -21,19 +21,19 @@ class BrokenPage:
         """)
 
     def get_image_elements(self):
+        # returns a list with 2 image elements (valid and broken img); locator tuple
         return [
             self.driver.find_element(*self.valid_image),
             self.driver.find_element(*self.broken_image)
         ]
 
     def get_image_sources(self):
-        images = self.get_image_elements()
-        return [img.get_attribute("src") for img in images]
+        images = self.get_image_elements() # calls 1st method to get img and stores in img list
+        return [img.get_attribute("src") for img in images] # extract img src and returns list of src url
 
-    # finds a tags and href link
     def get_link_elements(self):
-        return self.driver.find_elements(By.TAG_NAME, "a")
+        return self.driver.find_elements(By.TAG_NAME, "a") # finds a tags and href link
 
     def get_link_urls(self):
-        links = self.get_link_elements()
-        return [link.get_attribute("href") for link in links if link.get_attribute("href") is not None]
+        links = self.get_link_elements() # calls get_links_elements
+        return [link.get_attribute("href") for link in links if link.get_attribute("href") is not None] # gets href attributes and excludes a tags w/o href

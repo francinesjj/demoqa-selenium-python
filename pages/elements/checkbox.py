@@ -23,9 +23,6 @@ class CheckboxPage:
             const iframes = document.querySelectorAll('iframe');
             iframes.forEach(iframe => {
                 iframe.remove();
-
-                // hide iframes
-                // iframe.style.display = 'none';
             });
         """)
 
@@ -36,8 +33,8 @@ class CheckboxPage:
         time.sleep(1)
 
     def click_notes_checkbox(self):
-        notes = self.driver.find_element(*self.notes_checkbox)
-        ActionChains(self.driver).move_to_element(notes).click().perform()
+        notes = self.driver.find_element(*self.notes_checkbox) # finds note checkbox
+        ActionChains(self.driver).move_to_element(notes).click().perform() # creates ActionChain where cursor moves to checkbox and clicks on the element
 
     def get_result_text(self):
         wait = WebDriverWait(self.driver, 10)
